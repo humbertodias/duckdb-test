@@ -19,7 +19,7 @@ The project achieves the following:
   - `ioredis`
   Install them using:
   ```bash
-  npm install duckdb ioredis
+  npm install
   ```
 
 ## Project Structure
