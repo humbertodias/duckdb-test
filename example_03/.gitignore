@@ -1,2 +1,4 @@
 ./infra/db/**/*
 ./infra/db/
+infra/db/**/*
+infra/db/
