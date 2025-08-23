@@ -26,7 +26,7 @@ class DuckDbRepository {
   async joinUsers() {
     try {
       const rows = await this.allAsync(`
-        SELECT c.id, c.name, j.age
+        SELECT c.id, c.name, j.age, j.hasCar as has_car
         FROM users_csv c
         LEFT JOIN users_json j
         ON c.id = j.id
@@ -36,6 +36,7 @@ class DuckDbRepository {
         id: Number(r.id),
         name: r.name,
         age: r.age !== null ? Number(r.age) : null,
+        has_car: r.has_car !== null ? Boolean(r.has_car) : null,
       }));
     } catch (err) {
       console.error("Erro ao executar JOIN:", err);
@@ -50,8 +51,11 @@ async function main() {
   await repository.createTables();
 
   const users = await repository.joinUsers();
+
   console.log("Resultado do JOIN:");
-  console.table(users);
+  console.table(
+    users
+  );
 }
 
 main();
