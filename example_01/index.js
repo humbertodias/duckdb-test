@@ -35,8 +35,8 @@ class DuckDbRepository {
       return rows.map((r) => ({
         id: Number(r.id),
         name: r.name,
-        age: r.age !== null ? Number(r.age) : null,
-        has_car: r.has_car !== null ? Boolean(r.has_car) : null,
+        age: r.age !== null && r.age !== undefined ? Number(r.age) : null,
+        has_car: r.has_car,
       }));
     } catch (err) {
       console.error("Erro ao executar JOIN:", err);
@@ -53,9 +53,7 @@ async function main() {
   const users = await repository.joinUsers();
 
   console.log("Resultado do JOIN:");
-  console.table(
-    users
-  );
+  console.table(users);
 }
 
 main();
